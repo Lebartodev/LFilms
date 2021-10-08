@@ -1,0 +1,26 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android androidConfiguration
+
+dependencies {
+    api project(':lib-ui')
+    api project(':lib-data')
+    api project(':core')
+    api project(':lib-navigation')
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+
+    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
+
+    implementation 'io.coil-kt:coil:1.3.2'
+}

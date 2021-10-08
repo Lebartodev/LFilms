@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="trending_category_popular">Popular</string>
+    <string name="trending_category_now_playing">Now playing</string>
+    <string name="trending_category_latest">Latest</string>
+    <string name="trending_category_top_rated">Latest</string>
+    <string name="trending_category_upcoming">Upcoming</string>
+</resources>

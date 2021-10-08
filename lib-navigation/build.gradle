@@ -1,0 +1,11 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android androidConfiguration
+
+dependencies {
+    api "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    api "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
+}
