@@ -1,5 +1,6 @@
 package com.lebartodev.feature_trending.repository
 
+import android.util.Log
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.network.MoviesService
 import com.lebartodev.core.network.Response
@@ -16,6 +17,7 @@ class TrendingRepositoryImpl @Inject constructor(
     private val moviesService: MoviesService,
     private val moviesDao: MoviesDao,
 ) : TrendingRepository {
+    private val TAG = "TrendingRepository"
     private val trendingStateFlow =
         MutableStateFlow<Response<List<TrendingData>>>(Response.Loading())
 
@@ -35,6 +37,7 @@ class TrendingRepositoryImpl @Inject constructor(
                 trendingStateFlow.value = Response.Success(result)
             }
         } catch (e: Exception) {
+            Log.e(TAG, "refreshTrending: ", e)
             trendingStateFlow.value = Response.Error(e.localizedMessage)
         }
     }

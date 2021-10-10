@@ -1,6 +1,7 @@
 package com.lebartodev.core.db.dao
 
 import androidx.room.*
+import com.lebartodev.lib.data.entity.Movie
 import com.lebartodev.lib.data.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -17,12 +18,12 @@ interface MoviesDao {
     suspend fun updateMovieInternal(movieEntity: MovieEntity): Int
 
     @Transaction
-    suspend fun insertMovie(movieEntity: MovieEntity): Long {
+    suspend fun insertMovie(movie: Movie): Long {
         val id: Long
-        if (updateMovieInternal(movieEntity) == 0) {
-            id = insertMovieInternal(movieEntity)
+        if (updateMovieInternal(movie) == 0) {
+            id = insertMovieInternal(movie)
         } else {
-            id = movieEntity.id
+            id = movie.id
         }
         return id
     }

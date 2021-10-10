@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.request.ImageRequest
+import com.google.android.material.chip.Chip
 import com.lebartodev.core.di.coreComponent
 import com.lebartodev.core.fragmentArgs
 import com.lebartodev.core.utils.Size
@@ -18,6 +19,7 @@ import com.lebartodev.feature_details.di.DaggerDetailsComponent
 import com.lebartodev.lib_navigation.findNavigator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 class MovieDetailsFragment : Fragment() {
     private val binding by viewBinding(FragmentDetailsBinding::inflate)
@@ -66,6 +68,13 @@ class MovieDetailsFragment : Fragment() {
                 binding.shimmerViewContainer.stopShimmer()
                 binding.shimmerViewContainer.hideShimmer()
             }
+            it.genres.forEach {
+                val chip = Chip(context)
+                chip.text = it.name
+                binding.genres.addView(chip)
+            }
+
+
         }
 
     }

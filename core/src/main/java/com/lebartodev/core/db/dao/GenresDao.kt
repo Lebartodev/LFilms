@@ -2,6 +2,7 @@ package com.lebartodev.core.db.dao
 
 import androidx.room.*
 import com.lebartodev.lib.data.entity.GenreEntity
+import com.lebartodev.lib.data.entity.MovieGenre
 import kotlinx.coroutines.flow.Flow
 
 
@@ -33,8 +34,14 @@ interface GenresDao {
     @Update
     suspend fun updateGenres(genres: List<GenreEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertMovieGenres(movieGenres: List<MovieGenre>): List<Long>
+
+    @Update
+    suspend fun updateMovieGenres(movieGenres: List<MovieGenre>)
+
     @Transaction
-    suspend fun upsertGenres(genres: List<GenreEntity>) {
+    suspend fun upsertGenres(movieId: Long, genres: List<GenreEntity>) {
         val insertResult: List<Long> = insertGenres(genres)
         val updateList: MutableList<GenreEntity> = ArrayList()
 
@@ -46,6 +53,23 @@ interface GenresDao {
 
         if (updateList.isNotEmpty()) {
             updateGenres(updateList)
+        }
+        upsertMovieGenres(genres.map { MovieGenre(movieId, it.id) })
+    }
+
+    @Transaction
+    suspend fun upsertMovieGenres(movieGenres: List<MovieGenre>) {
+        val insertResult: List<Long> = insertMovieGenres(movieGenres)
+        val updateList: MutableList<MovieGenre> = ArrayList()
+
+        for (i in insertResult.indices) {
+            if (insertResult[i] == -1L) {
+                updateList.add(movieGenres[i])
+            }
+        }
+
+        if (updateList.isNotEmpty()) {
+            updateMovieGenres(updateList)
         }
     }
 }

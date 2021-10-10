@@ -1,12 +1,12 @@
 package com.lebartodev.core.di
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import coil.ImageLoader
 import com.lebartodev.core.BuildConfig
 import com.lebartodev.core.db.AppDatabase
+import com.lebartodev.core.db.dao.GenresDao
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.di.scope.AppScope
 import com.lebartodev.core.network.MoviesService
@@ -34,6 +34,9 @@ class DatabaseModule {
 
     @Provides
     fun provideMoviesDao(appDatabase: AppDatabase): MoviesDao = appDatabase.moviesDao()
+
+    @Provides
+    fun provideGenresDao(appDatabase: AppDatabase): GenresDao = appDatabase.genresDao()
 }
 
 @Module

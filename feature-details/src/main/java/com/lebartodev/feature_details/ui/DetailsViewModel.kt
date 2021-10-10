@@ -2,7 +2,7 @@ package com.lebartodev.feature_details.ui
 
 import androidx.lifecycle.*
 import com.lebartodev.feature_details.repository.DetailsRepository
-import com.lebartodev.lib.data.entity.MovieEntity
+import com.lebartodev.lib.data.entity.Movie
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -12,7 +12,9 @@ class DetailsViewModel constructor(
     private val movieId: Long,
     private val detailsRepository: DetailsRepository
 ) : ViewModel() {
-    private val movieLiveData = MutableLiveData<MovieEntity>()
+    private val movieLiveData = MutableLiveData<Movie>()
+
+    fun movie(): LiveData<Movie> = movieLiveData
 
     init {
         viewModelScope.launch {
@@ -20,9 +22,8 @@ class DetailsViewModel constructor(
             movieLiveData.value = result
         }
     }
-
-    fun movie(): LiveData<MovieEntity> = movieLiveData
 }
+
 class DetailsViewModelFactory @AssistedInject constructor(
     @Assisted("movieId") private val movieId: Long,
     private val detailsRepository: DetailsRepository
