@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.request.ImageRequest
-import com.google.android.material.chip.Chip
 import com.lebartodev.core.di.coreComponent
 import com.lebartodev.core.fragmentArgs
 import com.lebartodev.core.utils.Size
@@ -68,14 +67,7 @@ class MovieDetailsFragment : Fragment() {
                 binding.shimmerViewContainer.stopShimmer()
                 binding.shimmerViewContainer.hideShimmer()
             }
-            it.genres.forEach {
-                val chip = Chip(context)
-                chip.text = it.name
-                binding.genres.addView(chip)
-            }
-
-
+            binding.genresList.text = it.genres.joinToString(" • ") { it.name }
         }
-
     }
 }
