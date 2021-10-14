@@ -19,6 +19,7 @@ import com.lebartodev.lib_navigation.findNavigator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 class MovieDetailsFragment : Fragment() {
     private val binding by viewBinding(FragmentDetailsBinding::inflate)
     private val movieId: Long by fragmentArgs()
@@ -66,7 +67,7 @@ class MovieDetailsFragment : Fragment() {
                 binding.shimmerViewContainer.stopShimmer()
                 binding.shimmerViewContainer.hideShimmer()
             }
+            binding.genresList.text = it.genres.joinToString(" • ") { it.name }
         }
-
     }
 }

@@ -1,14 +1,16 @@
 package com.lebartodev.lib.data.network
 
+import com.google.gson.annotations.SerializedName
+
 data class MovieResponse(
     val id: Long,
     val adult: Boolean?,
     val budget: Int?,
-    val genres: List<GenreResponse>,
+    val genres: List<GenreResponse>? = null,
     val overview: String?,
-    val poster_path: String?,
-    val release_date: String?,
+    @SerializedName("poster_path") val posterPath: String?,
+    @SerializedName("poster_date") val releaseDate: String?,
     val title: String,
-    val vote_average: Double,
-    val vote_count: Int?
+    @SerializedName("vote_average") val voteAverage: Double,
+    @SerializedName("vote_average") val voteCount: Int?
 )

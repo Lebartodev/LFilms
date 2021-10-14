@@ -33,13 +33,8 @@ class HomePageFragment : Fragment(), HomeNavigator {
         binding.bottomNavigation.setupWithNavController(getNavController())
     }
 
-    companion object {
-        const val TAG = "HomePageFragment"
-    }
-
-    private fun getNavController(): NavController {
-        return (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
-    }
+    private fun getNavController(): NavController =
+        (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
 
     override fun navigateTo(direction: NavDirections, extras: Navigator.Extras?) {
         if (extras == null) {
@@ -54,7 +49,13 @@ class HomePageFragment : Fragment(), HomeNavigator {
     }
 
     override fun navigateTo(navigationFlow: HomeNavigationFlow) = when (navigationFlow) {
-        HomeNavigationFlow.Trending -> getNavController().navigate(BottomNavigationDirections.actionGlobalTrendingFlow())
-        HomeNavigationFlow.Search -> getNavController().navigate(BottomNavigationDirections.actionGlobalSearchFlow())
+        HomeNavigationFlow.Trending -> getNavController()
+            .navigate(BottomNavigationDirections.actionGlobalTrendingFlow())
+        HomeNavigationFlow.Search -> getNavController()
+            .navigate(BottomNavigationDirections.actionGlobalSearchFlow())
+    }
+
+    companion object {
+        const val TAG = "HomePageFragment"
     }
 }

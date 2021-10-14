@@ -13,6 +13,7 @@ class SearchPagingDataSource(
         val data: List<MovieEntity>
     )
 
+    @SuppressWarnings("TooGenericExceptionCaught")
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
         val pageNumber = params.key ?: 1
         try {
