@@ -49,7 +49,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.resultList.adapter = adapter
-        binding.resultList.layoutManager = GridLayoutManager(context, 3)
+        binding.resultList.layoutManager = GridLayoutManager(context, SEARCH_GRID_SPAN_COUNT)
         viewModel.error().observe(viewLifecycleOwner) {
             it?.run { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
         }
@@ -61,5 +61,9 @@ class SearchFragment : Fragment() {
                 adapter.submitData(pagingData)
             }
         }
+    }
+
+    companion object {
+        const val SEARCH_GRID_SPAN_COUNT = 3
     }
 }

@@ -72,9 +72,13 @@ class NetworkModule {
     @Provides
     fun provideImageLoader(application: Application): ImageLoader {
         return ImageLoader.Builder(application)
-            .availableMemoryPercentage(0.25)
+            .availableMemoryPercentage(MEMORY_PERCENTAGE)
             .crossfade(true)
             .build()
+    }
+
+    companion object {
+        const val MEMORY_PERCENTAGE = 0.25
     }
 }
 

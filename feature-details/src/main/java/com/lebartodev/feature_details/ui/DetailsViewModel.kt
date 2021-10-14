@@ -1,6 +1,10 @@
 package com.lebartodev.feature_details.ui
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.lebartodev.feature_details.repository.DetailsRepository
 import com.lebartodev.lib.data.entity.Movie
 import dagger.assisted.Assisted

@@ -7,4 +7,5 @@ android androidConfiguration
 dependencies {
     implementation "androidx.room:room-runtime:$roomRuntimeVersion"
     implementation "androidx.room:room-ktx:$roomRuntimeVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
 }

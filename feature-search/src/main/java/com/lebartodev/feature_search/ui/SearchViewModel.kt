@@ -15,7 +15,11 @@ import com.lebartodev.feature_search.repository.SearchRepository
 import com.lebartodev.lib.data.entity.MovieEntity
 import com.lebartodev.lib.data.mapper.toEntity
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -53,7 +57,7 @@ class SearchViewModel @Inject constructor(
                     SearchPagingDataSource {
                         val result = repository.search(it, term)
                         SearchPagingDataSource.PageData(
-                            maxPage = result.total_pages,
+                            maxPage = result.totalPages,
                             data = result.results?.map { it.toEntity() } ?: emptyList()
                         )
                     }

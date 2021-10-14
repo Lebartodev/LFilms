@@ -1,6 +1,11 @@
 package com.lebartodev.core.db.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
 import com.lebartodev.lib.data.entity.GenreEntity
 import com.lebartodev.lib.data.entity.MovieGenre
 import kotlinx.coroutines.flow.Flow

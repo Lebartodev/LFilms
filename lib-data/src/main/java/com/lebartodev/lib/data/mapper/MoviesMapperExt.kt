@@ -9,7 +9,7 @@ import com.lebartodev.lib.data.network.MovieResponse
 import com.lebartodev.lib.data.network.MoviesResponse
 
 fun MovieResponse.toEntity() =
-    Movie(id, title, poster_path, overview, vote_average, adult, budget, vote_count)
+    Movie(id, title, posterPath, overview, voteAverage, adult, budget, voteCount)
         .also {
             it.genres = this.genres?.map { it.toGenreEntity() } ?: emptyList()
         }

@@ -17,12 +17,12 @@ class TrendingRepositoryImpl @Inject constructor(
     private val moviesService: MoviesService,
     private val moviesDao: MoviesDao,
 ) : TrendingRepository {
-    private val TAG = "TrendingRepository"
     private val trendingStateFlow =
         MutableStateFlow<Response<List<TrendingData>>>(Response.Loading())
 
     override fun trending(): Flow<Response<List<TrendingData>>> = trendingStateFlow
 
+    @SuppressWarnings("TooGenericExceptionCaught")
     override suspend fun refreshTrending() {
         try {
             coroutineScope {
@@ -50,5 +50,9 @@ class TrendingRepositoryImpl @Inject constructor(
             TrendingCategory.TOP_RATED -> moviesService.getTopRated()
             TrendingCategory.UPCOMING -> moviesService.getUpcoming()
         }
+    }
+
+    companion object{
+        private const val TAG = "TrendingRepository"
     }
 }
