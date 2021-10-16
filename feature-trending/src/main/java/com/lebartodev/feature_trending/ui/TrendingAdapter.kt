@@ -41,11 +41,7 @@ class TrendingAdapter(private val listener: (Long) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val id = data[position].category.ordinal.toLong()
-        holder.bind(
-            data[position],
-            layoutManagerStates[data[position].category.ordinal.toLong()],
-            listener
-        )
+        holder.bind(data[position], layoutManagerStates[id], listener)
         visibleViews[holder.hashCode()] = WeakReference(holder)
     }
 

@@ -30,6 +30,7 @@ class TrendingRepositoryImpl @Inject constructor(
                     .map { async { TrendingData(it, loadTrendingCategory(it).toMovies()) } }
                     .awaitAll()
                     .filter { it.movies.isNotEmpty() }
+                    .also { moviesDao.upsertMovies(it.map { it.movies }.flatten()) }
             }
         }.loadIntoStateFlow(trendingStateFlow)
     }
@@ -42,9 +43,5 @@ class TrendingRepositoryImpl @Inject constructor(
             TrendingCategory.TOP_RATED -> moviesService.getTopRated()
             TrendingCategory.UPCOMING -> moviesService.getUpcoming()
         }
-    }
-
-    companion object {
-        private const val TAG = "TrendingRepository"
     }
 }
