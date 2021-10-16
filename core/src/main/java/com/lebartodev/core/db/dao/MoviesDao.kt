@@ -16,6 +16,10 @@ interface MoviesDao {
     @Query("SELECT * FROM movieentity")
     fun getAll(): Flow<List<MovieEntity>>
 
+    @Transaction
+    @Query("SELECT * FROM movieentity where id = :id")
+    suspend fun getById(id: Long): Movie
+
     @Insert
     suspend fun insertMovieInternal(movieEntity: MovieEntity): Long
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lebartodev.core.network.Response
+import com.lebartodev.core.network.AsyncResult
 import com.lebartodev.core.utils.SingleLiveEvent
 import com.lebartodev.feature_trending.repository.TrendingData
 import com.lebartodev.feature_trending.repository.TrendingRepository
@@ -27,14 +27,14 @@ class TrendingViewModel @Inject constructor(
             .mapLatest { response ->
                 withContext(Dispatchers.Main) {
                     when (response) {
-                        is Response.Success -> {
+                        is AsyncResult.Success -> {
                             trendingData.value = response.data
                         }
-                        is Response.Error -> {
-                            trendingErrorData.value = response.message
+                        is AsyncResult.Error -> {
+                            trendingErrorData.value = response.error?.localizedMessage
                         }
                     }
-                    loadingLiveData.value = response is Response.Loading
+                    loadingLiveData.value = response is AsyncResult.Loading
                 }
             }.launchIn(viewModelScope)
         refreshTrending()

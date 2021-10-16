@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.setPadding
 import coil.request.ImageRequest
 import com.lebartodev.core.di.coreComponent
 import com.lebartodev.core.utils.Size
@@ -17,10 +16,6 @@ class MovieView(
     defStyle: Int = 0
 ) : ConstraintLayout(context, attrs, defStyle) {
     private val binding = IMovieBinding.inflate(LayoutInflater.from(context), this)
-
-    init {
-        binding.root.setPadding(8.dp)
-    }
 
     fun setMovie(movieEntity: MovieEntity) {
         binding.title.text = movieEntity.title

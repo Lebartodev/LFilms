@@ -1,9 +1,9 @@
 package com.lebartodev.feature_trending.repository
 
-import android.util.Log
 import com.lebartodev.core.db.dao.MoviesDao
+import com.lebartodev.core.network.AsyncResult
 import com.lebartodev.core.network.MoviesService
-import com.lebartodev.core.network.Response
+import com.lebartodev.core.network.loadIntoStateFlow
 import com.lebartodev.lib.data.mapper.toMovies
 import com.lebartodev.lib.data.network.MoviesResponse
 import kotlinx.coroutines.async
@@ -18,28 +18,20 @@ class TrendingRepositoryImpl @Inject constructor(
     private val moviesDao: MoviesDao,
 ) : TrendingRepository {
     private val trendingStateFlow =
-        MutableStateFlow<Response<List<TrendingData>>>(Response.Loading())
+        MutableStateFlow<AsyncResult<List<TrendingData>>>(AsyncResult.Loading())
 
-    override fun trending(): Flow<Response<List<TrendingData>>> = trendingStateFlow
+    override fun trending(): Flow<AsyncResult<List<TrendingData>>> = trendingStateFlow
 
     @SuppressWarnings("TooGenericExceptionCaught")
     override suspend fun refreshTrending() {
-        try {
+        suspend {
             coroutineScope {
-                trendingStateFlow.value = Response.Loading()
-                val result = TrendingCategory.values()
+                TrendingCategory.values()
                     .map { async { TrendingData(it, loadTrendingCategory(it).toMovies()) } }
                     .awaitAll()
                     .filter { it.movies.isNotEmpty() }
-
-                moviesDao.upsertMovies(result.map { it.movies }.flatten())
-
-                trendingStateFlow.value = Response.Success(result)
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "refreshTrending: ", e)
-            trendingStateFlow.value = Response.Error(e.localizedMessage)
-        }
+        }.loadIntoStateFlow(trendingStateFlow)
     }
 
     private suspend fun loadTrendingCategory(trendingCategory: TrendingCategory): MoviesResponse {
@@ -52,7 +44,7 @@ class TrendingRepositoryImpl @Inject constructor(
         }
     }
 
-    companion object{
+    companion object {
         private const val TAG = "TrendingRepository"
     }
 }

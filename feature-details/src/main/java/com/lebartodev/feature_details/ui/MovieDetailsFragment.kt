@@ -51,12 +51,13 @@ class MovieDetailsFragment : Fragment() {
 
         binding.home.setOnClickListener { findNavigator().back() }
         viewModel.movie().observe(viewLifecycleOwner) {
-            binding.movieDescription.text = it.overview
-            binding.title.text = it.title
+            val data = it.data ?: return@observe
+            binding.movieDescription.text = data.overview
+            binding.title.text = data.title
             viewLifecycleOwner.lifecycleScope.launch {
                 val provider = context?.coreComponent()?.imageUrlProvider()
                 val loader = context?.coreComponent()?.imageLoader()
-                val posterPath = it.posterPath
+                val posterPath = data.posterPath
                 if (provider != null && loader != null && posterPath != null) {
                     val request = ImageRequest.Builder(requireContext())
                         .data(provider.provideImageUrl(posterPath, Size.BIG))
@@ -67,7 +68,7 @@ class MovieDetailsFragment : Fragment() {
                 binding.shimmerViewContainer.stopShimmer()
                 binding.shimmerViewContainer.hideShimmer()
             }
-            binding.genresList.text = it.genres.joinToString(" • ") { it.name }
+            binding.genresList.text = data.genres.joinToString(" • ") { it.name }
         }
     }
 }

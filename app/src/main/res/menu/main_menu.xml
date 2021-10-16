@@ -4,7 +4,7 @@
         android:id="@id/trending_flow"
         android:enabled="true"
         android:icon="@drawable/ic_home"
-        android:title="@string/menu_search" />
+        android:title="@string/menu_home" />
     <item
         android:id="@id/search_flow"
         android:enabled="true"
