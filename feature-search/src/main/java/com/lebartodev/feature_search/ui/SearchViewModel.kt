@@ -8,7 +8,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.lebartodev.core.network.Response
+import com.lebartodev.core.network.AsyncResult
 import com.lebartodev.core.utils.SingleLiveEvent
 import com.lebartodev.feature_search.repository.SearchPagingDataSource
 import com.lebartodev.feature_search.repository.SearchRepository
@@ -36,14 +36,14 @@ class SearchViewModel @Inject constructor(
             .mapLatest { response ->
                 withContext(Dispatchers.Main) {
                     when (response) {
-                        is Response.Success -> {
+                        is AsyncResult.Success -> {
                             searchData.value = response.data
                         }
-                        is Response.Error -> {
-                            searchErrorData.value = response.message
+                        is AsyncResult.Error -> {
+                            searchErrorData.value = response.error?.localizedMessage
                         }
                     }
-                    loadingLiveData.value = response is Response.Loading
+                    loadingLiveData.value = response is AsyncResult.Loading
                 }
             }.launchIn(viewModelScope)
     }

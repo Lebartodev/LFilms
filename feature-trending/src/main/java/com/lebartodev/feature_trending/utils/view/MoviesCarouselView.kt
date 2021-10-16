@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.lebartodev.feature_trending.databinding.ViewCarouselBinding
 import com.lebartodev.lib.data.entity.MovieEntity
+import com.lebartodev.lib_ui.addHorizontalSpacing
+import com.lebartodev.lib_ui.dp
 
 class MoviesCarouselView(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
     ConstraintLayout(context, attrs, defStyle) {
@@ -17,11 +20,19 @@ class MoviesCarouselView(context: Context, attrs: AttributeSet? = null, defStyle
     private val adapter =
         MoviesCarouselAdapter { movieId -> listener(movieId) }
     var listener: (Long) -> Unit? = {}
+    val layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
     init {
+        val snapHelper = LinearSnapHelper()
         binding.carouselList.adapter = adapter
-        binding.carouselList.layoutManager =
-            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.carouselList.layoutManager = layoutManager
+
+        snapHelper.attachToRecyclerView(binding.carouselList)
+        binding.carouselList.addHorizontalSpacing(6.dp)
+    }
+
+    fun setSharedViewPool(sharedPool: RecyclerView.RecycledViewPool) {
+        binding.carouselList.setRecycledViewPool(sharedPool)
     }
 
     fun setTitle(text: String) {

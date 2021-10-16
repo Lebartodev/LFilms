@@ -16,7 +16,7 @@ class Movie(
     @Relation(
         parentColumn = "id",
         entity = GenreEntity::class,
-        entityColumn = "noteId",
+        entityColumn = "id",
         associateBy = Junction(
             value = MovieGenre::class,
             parentColumn = "movieId",

@@ -2,7 +2,7 @@ package com.lebartodev.feature_search.repository
 
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.network.MoviesService
-import com.lebartodev.core.network.Response
+import com.lebartodev.core.network.AsyncResult
 import com.lebartodev.lib.data.entity.MovieEntity
 import com.lebartodev.lib.data.mapper.toEntity
 import com.lebartodev.lib.data.network.MoviesResponse
@@ -15,9 +15,9 @@ class SearchRepositoryImpl @Inject constructor(
     private val moviesService: MoviesService,
     private val moviesDao: MoviesDao,
 ) : SearchRepository {
-    private val searchStateFlow = MutableStateFlow<Response<List<MovieEntity>>>(Response.Loading())
+    private val searchStateFlow = MutableStateFlow<AsyncResult<List<MovieEntity>>>(AsyncResult.Loading())
 
-    override fun result(): Flow<Response<List<MovieEntity>>> = searchStateFlow
+    override fun result(): Flow<AsyncResult<List<MovieEntity>>> = searchStateFlow
 
     override suspend fun search(page: Int, term: String): MoviesResponse {
         return coroutineScope {

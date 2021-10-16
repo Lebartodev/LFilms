@@ -23,7 +23,7 @@ class TrendingFragment : Fragment() {
     @Inject
     lateinit var factory: ViewModelFactory
     private val viewModel: TrendingViewModel by viewModels { factory }
-    private val adapter = TrendingAdapter { movieId ->
+    private val trendingAdapter = TrendingAdapter { movieId ->
         findNavigator().navigateTo(TrendingFragmentDirections.actionDetails(movieId))
     }
 
@@ -45,10 +45,10 @@ class TrendingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.trendingList.adapter = adapter
+        binding.trendingList.adapter = trendingAdapter
         binding.trendingList.layoutManager = LinearLayoutManager(context)
         viewModel.trending().observe(viewLifecycleOwner) {
-            adapter.data = it
+            (binding.trendingList.adapter as TrendingAdapter).data = it
         }
         viewModel.error().observe(viewLifecycleOwner) {
             it?.run { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
