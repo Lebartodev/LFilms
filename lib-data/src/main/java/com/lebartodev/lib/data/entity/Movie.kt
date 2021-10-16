@@ -8,7 +8,7 @@ class Movie(
     title: String,
     posterPath: String?,
     overview: String?,
-    voteAverage: Double,
+    voteAverage: Double?,
     adult: Boolean?,
     budget: Int?,
     voteCount: Int?
