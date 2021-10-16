@@ -3,7 +3,7 @@ package com.lebartodev.feature_trending.repository
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.network.AsyncResult
 import com.lebartodev.core.network.MoviesService
-import com.lebartodev.core.network.loadIntoStateFlow
+import com.lebartodev.core.utils.loadIntoStateFlow
 import com.lebartodev.lib.data.mapper.toMovies
 import com.lebartodev.lib.data.network.MoviesResponse
 import kotlinx.coroutines.async
