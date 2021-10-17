@@ -9,6 +9,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.request.ImageRequest
 import com.lebartodev.core.di.coreComponent
 import com.lebartodev.core.fragmentArgs
@@ -17,6 +19,8 @@ import com.lebartodev.core.utils.viewBinding
 import com.lebartodev.feature_details.databinding.FragmentDetailsBinding
 import com.lebartodev.feature_details.di.DaggerDetailsComponent
 import com.lebartodev.lib_navigation.findNavigator
+import com.lebartodev.lib_ui.HorizontalSpaceItemDecoration
+import com.lebartodev.lib_ui.dp
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,6 +28,7 @@ import javax.inject.Inject
 class MovieDetailsFragment : Fragment() {
     private val binding by viewBinding(FragmentDetailsBinding::inflate)
     private val movieId: Long by fragmentArgs()
+    private val castAdapter = CastAdapter()
 
     @Inject
     lateinit var factory: DetailsViewModelFactory.Factory
@@ -49,6 +54,10 @@ class MovieDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.castList.adapter = castAdapter
+        binding.castList.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.castList.addItemDecoration(HorizontalSpaceItemDecoration(8.dp))
 
         binding.home.setOnClickListener { findNavigator().back() }
         viewModel.movie().observe(viewLifecycleOwner) {
@@ -74,6 +83,7 @@ class MovieDetailsFragment : Fragment() {
                 binding.shimmerViewContainer.hideShimmer()
             }
             binding.genresList.text = data.genres.joinToString(" • ") { it.name }
+            castAdapter.data = it.data?.cast ?: emptyList()
         }
     }
 }
