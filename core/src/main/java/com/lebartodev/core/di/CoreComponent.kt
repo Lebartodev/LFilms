@@ -2,6 +2,7 @@ package com.lebartodev.core.di
 
 import android.app.Application
 import coil.ImageLoader
+import com.lebartodev.core.db.dao.CreditsDao
 import com.lebartodev.core.db.dao.GenresDao
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.di.scope.AppScope
@@ -16,6 +17,7 @@ interface CoreComponent {
     fun moviesService(): MoviesService
     fun moviesDao(): MoviesDao
     fun genresDao(): GenresDao
+    fun creditsDao(): CreditsDao
     fun inject(provider: CoreComponentProvider)
     fun imageUrlProvider(): ImageUrlProvider
     fun imageLoader(): ImageLoader

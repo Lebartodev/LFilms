@@ -24,4 +24,11 @@ class Movie(
         )
     )
     var genres: List<GenreEntity> = arrayListOf()
+
+    @Relation(
+        parentColumn = "id",
+        entity = CastEntity::class,
+        entityColumn = "movieId",
+    )
+    var cast: List<CastEntity> = arrayListOf()
 }

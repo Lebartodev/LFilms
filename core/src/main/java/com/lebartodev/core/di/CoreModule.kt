@@ -6,6 +6,7 @@ import androidx.room.Room
 import coil.ImageLoader
 import com.lebartodev.core.BuildConfig
 import com.lebartodev.core.db.AppDatabase
+import com.lebartodev.core.db.dao.CreditsDao
 import com.lebartodev.core.db.dao.GenresDao
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.di.scope.AppScope
@@ -37,6 +38,9 @@ class DatabaseModule {
 
     @Provides
     fun provideGenresDao(appDatabase: AppDatabase): GenresDao = appDatabase.genresDao()
+
+    @Provides
+    fun provideCreditsDao(appDatabase: AppDatabase): CreditsDao = appDatabase.creditsDao()
 }
 
 @Module

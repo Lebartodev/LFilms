@@ -1,5 +1,6 @@
 package com.lebartodev.core.network
 
+import com.lebartodev.lib.data.network.CreditsResponse
 import com.lebartodev.lib.data.network.MovieResponse
 import com.lebartodev.lib.data.network.MoviesResponse
 import retrofit2.http.GET
@@ -30,4 +31,7 @@ interface MoviesService {
 
     @GET("movie/{movieId}")
     suspend fun getMovieDetails(@Path("movieId") movieId: Long): MovieResponse
+
+    @GET("movie/{movieId}/credits")
+    suspend fun getMovieCredits(@Path("movieId") movieId: Long): CreditsResponse
 }
