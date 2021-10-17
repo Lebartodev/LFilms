@@ -9,7 +9,7 @@ open class MovieEntity(
     val title: String,
     val posterPath: String?,
     val overview: String?,
-    val voteAverage: Double,
+    val voteAverage: Double?,
     val adult: Boolean?,
     val budget: Int?,
     val voteCount: Int?
