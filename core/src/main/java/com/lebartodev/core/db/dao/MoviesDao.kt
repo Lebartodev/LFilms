@@ -59,26 +59,4 @@ interface MoviesDao {
             updateMovies(updateList)
         }
     }
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertCasts(casts: List<CastEntity>): List<Long>
-
-    @Update
-    suspend fun updateCasts(casts: List<CastEntity>)
-
-    @Transaction
-    suspend fun upsertCasts(casts: List<CastEntity>) {
-        val insertResult: List<Long> = insertCasts(casts)
-        val updateList: MutableList<CastEntity> = ArrayList()
-
-        for (i in insertResult.indices) {
-            if (insertResult[i] == -1L) {
-                updateList.add(casts[i])
-            }
-        }
-
-        if (updateList.isNotEmpty()) {
-            updateCasts(updateList)
-        }
-    }
 }

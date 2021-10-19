@@ -11,7 +11,6 @@ dependencies {
     api project(':lib-data')
     api project(':core')
     api project(':lib-navigation')
-    implementation project(':feature-artist')
 
     implementation 'androidx.core:core-ktx:1.6.0'
 
