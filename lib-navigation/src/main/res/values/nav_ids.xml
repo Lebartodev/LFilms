@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="trending_flow" type="id" />
+    <item name="details_flow" type="id" />
     <item name="search_flow" type="id" />
 </resources>

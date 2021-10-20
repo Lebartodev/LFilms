@@ -10,6 +10,8 @@ import com.lebartodev.lib.data.entity.CastEntity
 
 @Dao
 interface CreditsDao {
+
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCast(cast: List<CastEntity>): List<Long>
 
