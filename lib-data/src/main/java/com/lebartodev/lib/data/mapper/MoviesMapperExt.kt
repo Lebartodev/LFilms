@@ -31,4 +31,4 @@ fun CastResponse.toEntity(movieId: Long) =
     CastEntity(id, movieId, name, originalName, castId, creditId, character, profilePath, order)
 
 fun PersonResponse.toEntity() =
-    PersonEntity(id, profilePath, name, biography, birthday, deathday, place_of_birth)
+    PersonEntity(id, profilePath, name, biography, birthday, deathday, placeOfBirth)

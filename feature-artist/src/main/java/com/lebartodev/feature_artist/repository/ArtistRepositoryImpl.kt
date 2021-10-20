@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class ArtistRepositoryImpl @Inject constructor(
     private val service: MoviesService,
-    private val creditsDao: CreditsDao
+    //private val creditsDao: CreditsDao
 ) : ArtistRepository {
     override fun getArtistDetails(creditId: String): Flow<AsyncResult<PersonEntity>> {
         return flow {
@@ -19,7 +19,7 @@ class ArtistRepositoryImpl @Inject constructor(
             emit(AsyncResult.Loading())
             val personId = creditDetails.person?.id
             if (personId == null) {
-                emit(AsyncResult.Error(NullPointerException()))
+                emit(AsyncResult.Error(NullPointerException("personId is null")))
                 return@flow
             }
             val person = service.getPerson(personId)

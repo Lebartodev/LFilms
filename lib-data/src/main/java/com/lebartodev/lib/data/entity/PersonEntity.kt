@@ -12,5 +12,5 @@ data class PersonEntity(
     val biography: String?,
     val birthday: Date,
     val deathday: Date?,
-    val place_of_birth: String?
+    val placeOfBirth: String?
 )

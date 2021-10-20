@@ -21,5 +21,5 @@ data class PersonResponse(
     val biography: String?,
     val birthday: Date,
     val deathday: Date?,
-    val place_of_birth: String?
+    @SerializedName("place_of_birth") val placeOfBirth: String?
 )

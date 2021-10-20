@@ -51,7 +51,7 @@ class ArtistDetailsFragment : Fragment() {
             val data = it.data ?: return@observe
             binding.artistBiography.text = data.biography
             binding.artistName.text = data.name
-            binding.artistBirthPlace.text = data.place_of_birth
+            binding.artistBirthPlace.text = data.placeOfBirth
 
             viewLifecycleOwner.lifecycleScope.launch {
                 val provider = context?.coreComponent()?.imageUrlProvider()
