@@ -6,6 +6,6 @@ plugins {
 android androidConfiguration
 
 dependencies {
-    api "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
-    api "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
+    api "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    api "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 }

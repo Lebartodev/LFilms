@@ -10,7 +10,8 @@ import com.lebartodev.core.utils.Size
 import com.lebartodev.feature_details.databinding.ICastBinding
 import com.lebartodev.lib.data.entity.CastEntity
 
-class CastAdapter : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
+class CastAdapter(private val listener: (String) -> Unit) :
+    RecyclerView.Adapter<CastAdapter.ViewHolder>() {
     var data: List<CastEntity> = listOf()
         set(value) {
             field = value
@@ -32,13 +33,13 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position], listener)
     }
 
 
     class ViewHolder(private val binding: ICastBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: CastEntity) {
+        fun bind(data: CastEntity, listener: (String) -> Unit) {
             binding.artistName.text = data.name
             binding.artistRole.text = data.character
             val path = data.profilePath ?: return
@@ -50,6 +51,7 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
                 .transformations(CircleCropTransformation())
                 .build()
             loader.enqueue(request)
+            data.creditId?.let { id-> binding.root.setOnClickListener { listener(id) } }
         }
     }
 

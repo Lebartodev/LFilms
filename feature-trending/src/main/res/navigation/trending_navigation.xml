@@ -11,7 +11,7 @@
 
         <action
             android:id="@+id/action_details"
-            app:destination="@id/movie_details"
+            app:destination="@id/details_flow"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -22,9 +22,5 @@
                 app:nullable="false" />
         </action>
     </fragment>
-
-    <fragment
-        android:id="@+id/movie_details"
-        android:name="com.lebartodev.feature_details.ui.MovieDetailsFragment"
-        tools:layout="@layout/fragment_details" />
+    <include app:graph="@navigation/details_navigation" />
 </navigation>

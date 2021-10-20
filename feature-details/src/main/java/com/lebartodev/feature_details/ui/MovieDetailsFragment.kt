@@ -28,7 +28,9 @@ import javax.inject.Inject
 class MovieDetailsFragment : Fragment() {
     private val binding by viewBinding(FragmentDetailsBinding::inflate)
     private val movieId: Long by fragmentArgs()
-    private val castAdapter = CastAdapter()
+    private val castAdapter = CastAdapter {
+        findNavigator().navigateTo(MovieDetailsFragmentDirections.actionArtistDetails(it))
+    }
 
     @Inject
     lateinit var factory: DetailsViewModelFactory.Factory
