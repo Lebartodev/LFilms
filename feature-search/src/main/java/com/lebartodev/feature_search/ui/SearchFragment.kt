@@ -14,9 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.lebartodev.core.di.coreComponent
 import com.lebartodev.core.utils.ViewModelFactory
 import com.lebartodev.core.utils.viewBinding
+import com.lebartodev.feature_details.ui.MovieDetailsFragment
 import com.lebartodev.feature_search.databinding.FragmentSearchBinding
 import com.lebartodev.feature_search.di.DaggerSearchComponent
-import com.lebartodev.lib_navigation.findNavigator
+import com.lebartodev.lib_navigation.navigator
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -27,7 +28,7 @@ class SearchFragment : Fragment() {
     lateinit var factory: ViewModelFactory
     private val viewModel: SearchViewModel by viewModels { factory }
     private val adapter = SearchAdapter { movieId ->
-        findNavigator().navigateTo(SearchFragmentDirections.actionDetails(movieId))
+        navigator.navigateTo(MovieDetailsFragment.create(movieId))
     }
 
     override fun onCreateView(

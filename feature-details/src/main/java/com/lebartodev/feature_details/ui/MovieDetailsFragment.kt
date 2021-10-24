@@ -16,9 +16,10 @@ import com.lebartodev.core.di.coreComponent
 import com.lebartodev.core.fragmentArgs
 import com.lebartodev.core.utils.Size
 import com.lebartodev.core.utils.viewBinding
+import com.lebartodev.feature_artist.ui.ArtistDetailsFragment
 import com.lebartodev.feature_details.databinding.FragmentDetailsBinding
 import com.lebartodev.feature_details.di.DaggerDetailsComponent
-import com.lebartodev.lib_navigation.findNavigator
+import com.lebartodev.lib_navigation.navigator
 import com.lebartodev.lib_ui.HorizontalSpaceItemDecoration
 import com.lebartodev.lib_ui.dp
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class MovieDetailsFragment : Fragment() {
     private val binding by viewBinding(FragmentDetailsBinding::inflate)
     private val movieId: Long by fragmentArgs()
     private val castAdapter = CastAdapter {
-        findNavigator().navigateTo(MovieDetailsFragmentDirections.actionArtistDetails(it))
+        navigator.navigateTo(ArtistDetailsFragment.create(it))
     }
 
     @Inject
@@ -61,7 +62,7 @@ class MovieDetailsFragment : Fragment() {
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         binding.castList.addItemDecoration(HorizontalSpaceItemDecoration(8.dp))
 
-        binding.home.setOnClickListener { findNavigator().back() }
+        binding.home.setOnClickListener { navigator.back() }
         viewModel.movie().observe(viewLifecycleOwner) {
             val data = it.data ?: return@observe
             binding.movieDescription.text = data.overview
@@ -86,6 +87,16 @@ class MovieDetailsFragment : Fragment() {
             }
             binding.genresList.text = data.genres.joinToString(" • ") { it.name }
             castAdapter.data = it.data?.cast ?: emptyList()
+        }
+    }
+
+    companion object {
+        fun create(movieId: Long): MovieDetailsFragment {
+            val fragment = MovieDetailsFragment()
+            val args = Bundle()
+            args.putLong("movieId", movieId)
+            fragment.arguments = args
+            return fragment
         }
     }
 }

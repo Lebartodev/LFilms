@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lebartodev.core.di.coreComponent
 import com.lebartodev.core.utils.ViewModelFactory
 import com.lebartodev.core.utils.viewBinding
+import com.lebartodev.feature_details.ui.MovieDetailsFragment
 import com.lebartodev.feature_trending.databinding.FragmentTrendingBinding
 import com.lebartodev.feature_trending.di.DaggerTrendingComponent
-import com.lebartodev.lib_navigation.findNavigator
+import com.lebartodev.lib_navigation.navigator
 import javax.inject.Inject
 
 class TrendingFragment : Fragment() {
@@ -24,7 +25,7 @@ class TrendingFragment : Fragment() {
     lateinit var factory: ViewModelFactory
     private val viewModel: TrendingViewModel by viewModels { factory }
     private val trendingAdapter = TrendingAdapter { movieId ->
-        findNavigator().navigateTo(TrendingFragmentDirections.actionDetails(movieId))
+        navigator.navigateTo(MovieDetailsFragment.create(movieId))
     }
 
     override fun onCreateView(
