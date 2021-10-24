@@ -30,7 +30,7 @@ class MainNavFragment : Fragment(), MainNavigator {
 
         viewLifecycleOwner.lifecycleScope.launch {
             navigateTo(SplashFragment())
-            delay(5000L)
+            delay(MAX_DELAY)
             navigateTo(HomePageFragment())
         }
     }
@@ -48,6 +48,7 @@ class MainNavFragment : Fragment(), MainNavigator {
     }
 
     companion object {
+        const val MAX_DELAY = 5000L
         const val TAG = "MainNavFragment"
     }
 }
