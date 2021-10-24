@@ -5,20 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import androidx.navigation.Navigator
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.lebartodev.core.utils.viewBinding
-import com.lebartodev.lfilms.BottomNavigationDirections
+import com.lebartodev.feature_search.ui.SearchFragment
+import com.lebartodev.feature_trending.ui.TrendingFragment
 import com.lebartodev.lfilms.R
 import com.lebartodev.lfilms.databinding.FragmentHomePageBinding
-import com.lebartodev.lib_navigation.HomeNavigationFlow
-import com.lebartodev.lib_navigation.HomeNavigator
 
-class HomePageFragment : Fragment(), HomeNavigator {
+class HomePageFragment : Fragment() {
     private val binding by viewBinding(FragmentHomePageBinding::inflate)
+    private val trendingFragment by lazy { TrendingFragment() }
+    private val searchFragment by lazy { SearchFragment() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,29 +26,22 @@ class HomePageFragment : Fragment(), HomeNavigator {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.bottomNavigation.setupWithNavController(getNavController())
-    }
-
-    private fun getNavController(): NavController =
-        (childFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
-
-    override fun navigateTo(direction: NavDirections, extras: Navigator.Extras?) {
-        if (extras == null) {
-            getNavController().navigate(direction)
-        } else {
-            getNavController().navigate(direction, extras)
+        binding.bottomNavigation.setOnItemSelectedListener {
+            val fragment = when (it.itemId) {
+                R.id.trending_flow -> trendingFragment
+                R.id.search_flow -> searchFragment
+                else -> null
+            }
+            if (fragment != null) {
+                childFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment, fragment, fragment.javaClass.name)
+                    .commit()
+                return@setOnItemSelectedListener true
+            }
+            false
         }
-    }
-
-    override fun back() {
-        getNavController().popBackStack()
-    }
-
-    override fun navigateTo(navigationFlow: HomeNavigationFlow) = when (navigationFlow) {
-        HomeNavigationFlow.Trending -> getNavController()
-            .navigate(BottomNavigationDirections.actionGlobalTrendingFlow())
-        HomeNavigationFlow.Search -> getNavController()
-            .navigate(BottomNavigationDirections.actionGlobalSearchFlow())
+        binding.bottomNavigation.selectedItemId = R.id.trending_flow
     }
 
     companion object {

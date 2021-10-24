@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/compose-model-1634920100578.xml" value="0.375" />
+        <entry key="../../../../layout/compose-model-1634929966566.xml" value="0.25" />
+        <entry key="../../../../layout/compose-model-1634974520975.xml" value="0.14907407407407408" />
+        <entry key="../../../../layout/compose-model-1635093468773.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1635097641243.xml" value="0.16977138018628282" />
+        <entry key="../../../../layout/compose-model-1635104340016.xml" value="0.18055555555555555" />
+        <entry key="../../../../layout/custom_preview.xml" value="0.27314814814814814" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home_page.xml" value="0.19927536231884058" />
+        <entry key="app/src/main/res/layout/fragment_main_nav.xml" value="0.125" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.18333333333333332" />
         <entry key="feature-artist/src/main/res/layout/fragment_artist_details.xml" value="0.10764944275582573" />
         <entry key="feature-details/src/main/res/layout/fragment_details.xml" value="0.1" />
       </map>

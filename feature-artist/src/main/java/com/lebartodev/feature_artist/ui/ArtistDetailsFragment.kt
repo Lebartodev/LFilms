@@ -15,7 +15,7 @@ import com.lebartodev.core.utils.Size
 import com.lebartodev.core.utils.viewBinding
 import com.lebartodev.feature_artist.databinding.FragmentArtistDetailsBinding
 import com.lebartodev.feature_artist.di.DaggerArtistComponent
-import com.lebartodev.lib_navigation.findNavigator
+import com.lebartodev.lib_navigation.navigator
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -46,7 +46,7 @@ class ArtistDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.backButton.setOnClickListener { findNavigator().back() }
+        binding.backButton.setOnClickListener { navigator.back() }
         viewModel.artist().observe(viewLifecycleOwner) {
             val data = it.data ?: return@observe
             binding.artistBiography.text = data.biography
@@ -69,6 +69,16 @@ class ArtistDetailsFragment : Fragment() {
             }
             binding.artistBirth.text = listOf(data.birthday, data.deathday)
                 .joinToString(" - ") { it.toString() }
+        }
+    }
+
+    companion object {
+        fun create(creditId: String): ArtistDetailsFragment {
+            val fragment = ArtistDetailsFragment()
+            val args = Bundle()
+            args.putString("creditId", creditId)
+            fragment.arguments = args
+            return fragment
         }
     }
 }

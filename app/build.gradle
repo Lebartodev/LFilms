@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -41,7 +40,9 @@ dependencies {
     implementation project(':lib-navigation')
     implementation project(':feature-trending')
     implementation project(':feature-search')
+    implementation project(':feature-splash')
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
-    implementation "com.google.android.material:material:$materialVersion"}
+    implementation "com.google.android.material:material:$materialVersion"
+}
