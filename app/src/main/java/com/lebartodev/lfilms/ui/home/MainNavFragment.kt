@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.lebartodev.core.utils.viewBinding
+import com.lebartodev.feature_login.ui.LoginFragment
 import com.lebartodev.feature_splash.SplashFragment
 import com.lebartodev.lfilms.R
 import com.lebartodev.lfilms.databinding.FragmentMainNavBinding

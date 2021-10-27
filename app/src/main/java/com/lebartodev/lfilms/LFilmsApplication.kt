@@ -4,6 +4,7 @@ import android.app.Application
 import com.lebartodev.core.di.CoreComponent
 import com.lebartodev.core.di.CoreComponentProvider
 import com.lebartodev.core.di.DaggerCoreComponent
+import kotlinx.coroutines.cancel
 
 class LFilmsApplication : Application(), CoreComponentProvider {
     override lateinit var coreComponent: CoreComponent
@@ -11,6 +12,11 @@ class LFilmsApplication : Application(), CoreComponentProvider {
     override fun onCreate() {
         super.onCreate()
         coreComponent = initCore()
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        coreComponent.coroutineScope().cancel()
     }
 
     private fun initCore(): CoreComponent {

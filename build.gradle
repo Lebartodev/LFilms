@@ -41,6 +41,7 @@ ext {
     pagingVersion = "3.0.1"
     lottieVersion = "4.2.0"
     composeVersion = "1.0.4"
+    coroutinesVersion = "1.5.1"
 }
 
 ext {

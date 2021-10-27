@@ -9,21 +9,28 @@ import com.lebartodev.core.db.AppDatabase
 import com.lebartodev.core.db.dao.CreditsDao
 import com.lebartodev.core.db.dao.GenresDao
 import com.lebartodev.core.db.dao.MoviesDao
-import com.lebartodev.core.di.scope.AppScope
 import com.lebartodev.core.network.MoviesService
+import com.lebartodev.lib_utils.utils.AppCoroutineScope
 import com.lebartodev.core.utils.ImageUrlProvider
 import com.lebartodev.core.utils.ImageUrlProviderImpl
 import com.lebartodev.core.utils.ViewModelFactory
+import com.lebartodev.lib_utils.di.scope.AppScope
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-@Module(includes = [NetworkModule::class, DatabaseModule::class, FactoryModule::class, ImageProviderModule::class])
+@Module(
+    includes = [NetworkModule::class, DatabaseModule::class,
+        FactoryModule::class, ImageProviderModule::class,
+        CoroutineScopeModule::class]
+)
 interface CoreModule
 
 @Module
@@ -96,4 +103,12 @@ interface FactoryModule {
 interface ImageProviderModule {
     @Binds
     fun bindViewModelFactory(provider: ImageUrlProviderImpl): ImageUrlProvider
+}
+
+@Module
+class CoroutineScopeModule {
+    @AppScope
+    @Provides
+    fun provideAppCoroutineScope(): AppCoroutineScope =
+        AppCoroutineScope(SupervisorJob() + Dispatchers.Main)
 }

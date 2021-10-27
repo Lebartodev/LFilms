@@ -1,4 +1,4 @@
-package com.lebartodev.core.di.scope
+package com.lebartodev.lib_utils.di.scope
 
 import javax.inject.Scope
 

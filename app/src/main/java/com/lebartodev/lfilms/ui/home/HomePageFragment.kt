@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.lebartodev.core.utils.viewBinding
+import com.lebartodev.feature_login.ui.LoginFragment
 import com.lebartodev.feature_search.ui.SearchFragment
 import com.lebartodev.feature_trending.ui.TrendingFragment
 import com.lebartodev.lfilms.R
@@ -14,6 +15,7 @@ import com.lebartodev.lfilms.databinding.FragmentHomePageBinding
 class HomePageFragment : Fragment() {
     private val binding by viewBinding(FragmentHomePageBinding::inflate)
     private val trendingFragment by lazy { TrendingFragment() }
+    private val accountFragment by lazy { LoginFragment() }
     private val searchFragment by lazy { SearchFragment() }
 
     override fun onCreateView(
@@ -30,6 +32,7 @@ class HomePageFragment : Fragment() {
             val fragment = when (it.itemId) {
                 R.id.trending_flow -> trendingFragment
                 R.id.search_flow -> searchFragment
+                R.id.account_flow -> accountFragment
                 else -> null
             }
             if (fragment != null) {
