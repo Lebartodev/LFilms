@@ -18,7 +18,7 @@ interface AuthenticationModule
 
 @Module
 interface AuthenticationRepositoryModule {
-    @AppScope //For future
+    @AppScope
     @Binds
     fun provideRepository(manager: AccountManagerImpl): AccountManager
 }

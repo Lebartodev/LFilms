@@ -12,6 +12,7 @@ class LFilmsApplication : Application(), CoreComponentProvider {
     override fun onCreate() {
         super.onCreate()
         coreComponent = initCore()
+        coreComponent.accountRepository()
     }
 
     override fun onTerminate() {

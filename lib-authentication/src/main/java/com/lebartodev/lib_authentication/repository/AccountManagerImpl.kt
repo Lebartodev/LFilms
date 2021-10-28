@@ -10,6 +10,7 @@ import com.lebartodev.lib_utils.di.scope.AppScope
 import com.lebartodev.lib_utils.utils.AppCoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,10 +21,11 @@ class AccountManagerImpl @Inject constructor(
     private val appCoroutineScope: AppCoroutineScope
 ) : AccountManager {
     private val accountMutableState = MutableStateFlow<AccountEntity?>(null)
-    private val requestTokenState = MutableStateFlow<String?>(null)
+    private val requestTokenState = MutableStateFlow<String?>("sss")
 
 
     init {
+        Log.d("AccountManager", "init $this")
         appCoroutineScope.launch {
             accountMutableState.value = accountDao.getAccount()
             if (!isAuthorized()) {
@@ -32,11 +34,11 @@ class AccountManagerImpl @Inject constructor(
         }
     }
 
-    override fun account(): Flow<AccountEntity> {
-        return accountDao.account()
+    override fun account(): StateFlow<AccountEntity?> {
+        return accountMutableState
     }
 
-    override fun requestToken(): Flow<String?> {
+    override fun requestToken(): StateFlow<String?> {
         return requestTokenState
     }
 

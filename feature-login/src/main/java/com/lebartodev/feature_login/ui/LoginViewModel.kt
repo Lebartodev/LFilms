@@ -1,11 +1,13 @@
 package com.lebartodev.feature_login.ui
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lebartodev.lib_authentication.repository.AccountManager
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,13 +26,17 @@ class LoginViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            manager.account().onEach { setState { copy(complete = true) } }
-            manager.requestToken().onEach { setState { copy(requestToken = it, loading = false) } }
+            manager.requestToken()
+                .collect { setState { copy(requestToken = it, loading = false) } }
+        }
+        viewModelScope.launch {
+            manager.account()
+                .collect { setState { copy(complete = true) } }
         }
     }
 
     fun checkAccount() {
-        setState { copy(loading = true) }
+        //setState { copy(loading = true) }
         manager.updateSessionId()
     }
 

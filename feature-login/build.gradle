@@ -43,6 +43,7 @@ android {
 dependencies {
     api project(':core')
     api project(':lib-navigation')
+    api project(':lib-ui')
     implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
