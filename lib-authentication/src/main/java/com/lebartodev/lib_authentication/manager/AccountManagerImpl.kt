@@ -1,4 +1,4 @@
-package com.lebartodev.lib_authentication.repository
+package com.lebartodev.lib_authentication.manager
 
 import android.util.Log
 import com.lebartodev.lib_authentication.db.dao.AccountDao
@@ -8,10 +8,11 @@ import com.lebartodev.lib_authentication.network.AccountService
 import com.lebartodev.lib_authentication.network.request.SessionIdRequest
 import com.lebartodev.lib_utils.di.scope.AppScope
 import com.lebartodev.lib_utils.utils.AppCoroutineScope
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @AppScope
@@ -21,11 +22,9 @@ class AccountManagerImpl @Inject constructor(
     private val appCoroutineScope: AppCoroutineScope
 ) : AccountManager {
     private val accountMutableState = MutableStateFlow<AccountEntity?>(null)
-    private val requestTokenState = MutableStateFlow<String?>("sss")
-
+    private val requestTokenState = MutableStateFlow<String?>(null)
 
     init {
-        Log.d("AccountManager", "init $this")
         appCoroutineScope.launch {
             accountMutableState.value = accountDao.getAccount()
             if (!isAuthorized()) {
@@ -43,12 +42,24 @@ class AccountManagerImpl @Inject constructor(
     }
 
     override suspend fun isAuthorized(): Boolean {
-        return accountDao.getAccount() != null
+        return accountMutableState.value != null
     }
 
     private suspend fun generateRequestToken() {
-        val requestToken = accountService.generateRequestToken().requestToken
-        requestTokenState.value = requestToken
+        val response = accountService.generateRequestToken()
+        requestTokenState.value = response.requestToken
+        Log.d(TAG, "generateRequestToken: ${response.requestToken}")
+        scheduleRefreshRequestToken(response.expiresAt)
+    }
+
+    private fun scheduleRefreshRequestToken(expiresAt: Date) {
+        val currentTime = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+        val timeUntilExpires = expiresAt.time - currentTime.time.time
+        appCoroutineScope.launch {
+            Log.d(TAG, "Schedule refresh for $timeUntilExpires millis")
+            delay(timeUntilExpires)
+            generateRequestToken()
+        }
     }
 
     override fun updateSessionId() {
@@ -59,8 +70,12 @@ class AccountManagerImpl @Inject constructor(
                 val account = accountService.getDetails(sessionIdResponse.sessionId)
                 accountDao.upsertAccount(account.toEntity(sessionId = sessionIdResponse.sessionId))
             } catch (e: Exception) {
-                Log.e("AccountManager", "updateSessionId", e)
+                Log.e(TAG, "updateSessionId", e)
             }
         }
+    }
+
+    companion object {
+        const val TAG = "AccountManager"
     }
 }

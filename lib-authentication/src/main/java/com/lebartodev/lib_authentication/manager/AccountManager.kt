@@ -1,4 +1,4 @@
-package com.lebartodev.lib_authentication.repository
+package com.lebartodev.lib_authentication.manager
 
 import com.lebartodev.lib_authentication.db.entity.AccountEntity
 import kotlinx.coroutines.flow.Flow

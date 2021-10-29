@@ -4,17 +4,18 @@ import android.app.Application
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import coil.ImageLoader
+import com.google.gson.GsonBuilder
 import com.lebartodev.core.BuildConfig
 import com.lebartodev.core.db.AppDatabase
 import com.lebartodev.core.db.dao.CreditsDao
 import com.lebartodev.core.db.dao.GenresDao
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.network.MoviesService
-import com.lebartodev.lib_utils.utils.AppCoroutineScope
 import com.lebartodev.core.utils.ImageUrlProvider
 import com.lebartodev.core.utils.ImageUrlProviderImpl
 import com.lebartodev.core.utils.ViewModelFactory
 import com.lebartodev.lib_utils.di.scope.AppScope
+import com.lebartodev.lib_utils.utils.AppCoroutineScope
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -25,6 +26,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 @Module(
     includes = [NetworkModule::class, DatabaseModule::class,
@@ -68,10 +70,13 @@ class NetworkModule {
             val request: Request = requestBuilder.build()
             chain.proceed(request)
         }
+        val gson = GsonBuilder()
+            .setDateFormat("yyyy-MM-dd HH:mm:ss z")
+            .create()
         return Retrofit.Builder()
             .baseUrl(BuildConfig.SERVER_URL)
             .client(httpClient.build())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

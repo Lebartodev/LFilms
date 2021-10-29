@@ -5,8 +5,8 @@ import androidx.room.Room
 import com.lebartodev.lib_authentication.db.AccountDatabase
 import com.lebartodev.lib_authentication.db.dao.AccountDao
 import com.lebartodev.lib_authentication.network.AccountService
-import com.lebartodev.lib_authentication.repository.AccountManager
-import com.lebartodev.lib_authentication.repository.AccountManagerImpl
+import com.lebartodev.lib_authentication.manager.AccountManager
+import com.lebartodev.lib_authentication.manager.AccountManagerImpl
 import com.lebartodev.lib_utils.di.scope.AppScope
 import dagger.Binds
 import dagger.Module

@@ -1,14 +1,12 @@
 package com.lebartodev.feature_login.ui
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lebartodev.lib_authentication.repository.AccountManager
+import com.lebartodev.lib_authentication.manager.AccountManager
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

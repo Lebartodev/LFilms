@@ -10,7 +10,7 @@ import com.lebartodev.lib_utils.utils.AppCoroutineScope
 import com.lebartodev.core.utils.ImageUrlProvider
 import com.lebartodev.lib_authentication.di.AuthenticationModule
 import com.lebartodev.lib_authentication.network.AccountService
-import com.lebartodev.lib_authentication.repository.AccountManager
+import com.lebartodev.lib_authentication.manager.AccountManager
 import com.lebartodev.lib_utils.di.scope.AppScope
 import dagger.BindsInstance
 import dagger.Component
