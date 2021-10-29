@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.lebartodev.core.network.AsyncResult
+import com.lebartodev.lib_utils.utils.AsyncResult
 import com.lebartodev.feature_artist.repository.ArtistRepository
 import com.lebartodev.lib.data.entity.PersonEntity
 import dagger.assisted.Assisted

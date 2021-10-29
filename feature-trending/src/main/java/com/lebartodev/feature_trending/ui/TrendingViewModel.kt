@@ -4,21 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.lebartodev.core.network.AsyncResult
+import com.lebartodev.lib_utils.utils.AsyncResult
 import com.lebartodev.core.utils.SingleLiveEvent
-import com.lebartodev.feature_trending.repository.TrendingData
-import com.lebartodev.feature_trending.repository.TrendingRepository
+import com.lebartodev.lib_trending.TrendingData
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class TrendingViewModel @Inject constructor(
-    private val repository: TrendingRepository
+    private val repository: com.lebartodev.lib_trending.TrendingRepository
 ) : ViewModel() {
-    private val trendingData = MutableLiveData<List<TrendingData>>()
+    private val trendingData = MutableLiveData<List<com.lebartodev.lib_trending.TrendingData>>()
     private val loadingLiveData = MutableLiveData<Boolean>()
     private val trendingErrorData = SingleLiveEvent<String>()
 

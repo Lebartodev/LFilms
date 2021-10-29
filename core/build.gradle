@@ -10,6 +10,7 @@ dependencies {
     api project(':lib-data')
     api project(':lib-authentication')
     api project(':lib-utils')
+    api project(':lib-trending')
 
 
     implementation 'io.coil-kt:coil-base:1.3.2'

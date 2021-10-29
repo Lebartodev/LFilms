@@ -3,7 +3,7 @@ package com.lebartodev.feature_trending.ui
 import android.os.Parcelable
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lebartodev.feature_trending.repository.TrendingData
+import com.lebartodev.lib_trending.TrendingData
 import com.lebartodev.feature_trending.utils.view.MoviesCarouselView
 import com.lebartodev.lib_ui.dp
 import java.lang.ref.WeakReference
@@ -14,7 +14,7 @@ class TrendingAdapter(private val listener: (Long) -> Unit) :
     private val layoutManagerStates = hashMapOf<Long, Parcelable?>()
     private val visibleViews = hashMapOf<Int, WeakReference<ViewHolder>>()
 
-    var data: List<TrendingData> = listOf()
+    var data: List<com.lebartodev.lib_trending.TrendingData> = listOf()
         set(value) {
             saveState()
             field = value
@@ -72,7 +72,7 @@ class TrendingAdapter(private val listener: (Long) -> Unit) :
 
     class ViewHolder(val v: MoviesCarouselView) : RecyclerView.ViewHolder(v) {
         var trendingViewId: Long? = null
-        fun bind(data: TrendingData, state: Parcelable? = null, listener: (Long) -> Unit) {
+        fun bind(data: com.lebartodev.lib_trending.TrendingData, state: Parcelable? = null, listener: (Long) -> Unit) {
             trendingViewId = data.category.ordinal.toLong()
             v.setTitle(data.category.title)
             v.setMovies(data.movies)

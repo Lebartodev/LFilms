@@ -8,7 +8,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.lebartodev.core.network.AsyncResult
+import com.lebartodev.lib_utils.utils.AsyncResult
 import com.lebartodev.core.utils.SingleLiveEvent
 import com.lebartodev.feature_search.repository.SearchPagingDataSource
 import com.lebartodev.feature_search.repository.SearchRepository

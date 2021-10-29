@@ -14,6 +14,7 @@ import com.lebartodev.core.network.MoviesService
 import com.lebartodev.core.utils.ImageUrlProvider
 import com.lebartodev.core.utils.ImageUrlProviderImpl
 import com.lebartodev.core.utils.ViewModelFactory
+import com.lebartodev.lib_trending.di.TrendingRepositoryModule
 import com.lebartodev.lib_utils.di.scope.AppScope
 import com.lebartodev.lib_utils.utils.AppCoroutineScope
 import dagger.Binds
@@ -31,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module(
     includes = [NetworkModule::class, DatabaseModule::class,
         FactoryModule::class, ImageProviderModule::class,
-        CoroutineScopeModule::class]
+        CoroutineScopeModule::class, TrendingRepositoryModule::class]
 )
 interface CoreModule
 

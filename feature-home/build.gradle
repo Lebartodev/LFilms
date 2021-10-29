@@ -1,0 +1,23 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android androidConfiguration
+
+dependencies {
+    api project(':core')
+    implementation project(':lib-navigation')
+    implementation project(':feature-trending')
+    implementation project(':feature-login')
+    implementation project(':feature-search')
+    implementation project(':feature-splash')
+
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+}

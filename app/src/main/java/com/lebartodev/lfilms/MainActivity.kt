@@ -2,7 +2,7 @@ package com.lebartodev.lfilms
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.lebartodev.lfilms.ui.home.MainNavFragment
+import com.lebartodev.feature_home.MainNavFragment
 
 class MainActivity : AppCompatActivity() {
 

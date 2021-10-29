@@ -9,9 +9,9 @@ android androidConfiguration
 dependencies {
     api project(':lib-ui')
     api project(':lib-data')
-    api project(':core')
     api project(':feature-details')
     api project(':lib-navigation')
+    api project(':lib-trending')
 
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"

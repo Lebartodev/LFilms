@@ -98,7 +98,7 @@ private fun LoginContent(viewModel: LoginViewModel) {
                     modifier = Modifier
                         .background(
                             colorResource(id = R.color.orange_peel),
-                            RoundedCornerShape(10)
+                            RoundedCornerShape(percent = 10)
                         )
                         .padding(8.dp)
                 )

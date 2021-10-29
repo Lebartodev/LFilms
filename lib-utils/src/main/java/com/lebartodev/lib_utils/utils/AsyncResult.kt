@@ -1,4 +1,4 @@
-package com.lebartodev.core.network
+package com.lebartodev.lib_utils.utils
 
 sealed class AsyncResult<T>(open val data: T? = null) {
     class Success<T>(data: T) : AsyncResult<T>(data) {

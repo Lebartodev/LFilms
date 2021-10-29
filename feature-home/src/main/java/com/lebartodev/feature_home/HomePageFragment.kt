@@ -1,4 +1,4 @@
-package com.lebartodev.lfilms.ui.home
+package com.lebartodev.feature_home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.lebartodev.core.utils.viewBinding
+import com.lebartodev.feature_home.databinding.FragmentHomePageBinding
 import com.lebartodev.feature_login.ui.LoginFragment
 import com.lebartodev.feature_search.ui.SearchFragment
 import com.lebartodev.feature_trending.ui.TrendingFragment
-import com.lebartodev.lfilms.R
-import com.lebartodev.lfilms.databinding.FragmentHomePageBinding
 
 class HomePageFragment : Fragment() {
     private val binding by viewBinding(FragmentHomePageBinding::inflate)

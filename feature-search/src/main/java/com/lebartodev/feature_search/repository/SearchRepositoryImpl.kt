@@ -2,7 +2,7 @@ package com.lebartodev.feature_search.repository
 
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.network.MoviesService
-import com.lebartodev.core.network.AsyncResult
+import com.lebartodev.lib_utils.utils.AsyncResult
 import com.lebartodev.lib.data.entity.MovieEntity
 import com.lebartodev.lib.data.mapper.toEntity
 import com.lebartodev.lib.data.network.MoviesResponse

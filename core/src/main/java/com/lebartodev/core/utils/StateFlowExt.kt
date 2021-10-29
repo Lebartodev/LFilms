@@ -1,6 +1,6 @@
 package com.lebartodev.core.utils
 
-import com.lebartodev.core.network.AsyncResult
+import com.lebartodev.lib_utils.utils.AsyncResult
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 

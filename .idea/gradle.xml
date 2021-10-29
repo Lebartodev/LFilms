@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/feature-artist" />
             <option value="$PROJECT_DIR$/feature-details" />
+            <option value="$PROJECT_DIR$/feature-home" />
             <option value="$PROJECT_DIR$/feature-login" />
             <option value="$PROJECT_DIR$/feature-search" />
             <option value="$PROJECT_DIR$/feature-splash" />
@@ -22,6 +23,7 @@
             <option value="$PROJECT_DIR$/lib-authentication" />
             <option value="$PROJECT_DIR$/lib-data" />
             <option value="$PROJECT_DIR$/lib-navigation" />
+            <option value="$PROJECT_DIR$/lib-trending" />
             <option value="$PROJECT_DIR$/lib-ui" />
             <option value="$PROJECT_DIR$/lib-utils" />
           </set>

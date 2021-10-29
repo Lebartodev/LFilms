@@ -38,10 +38,7 @@ android {
 dependencies {
     api project(':core')
     implementation project(':lib-navigation')
-    implementation project(':feature-trending')
-    implementation project(':feature-login')
-    implementation project(':feature-search')
-    implementation project(':feature-splash')
+    implementation project(':feature-home')
 
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"

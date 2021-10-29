@@ -62,6 +62,7 @@ class AccountManagerImpl @Inject constructor(
         }
     }
 
+    @SuppressWarnings("TooGenericExceptionCaught")
     override fun updateSessionId() {
         appCoroutineScope.launch {
             try {
@@ -69,7 +70,7 @@ class AccountManagerImpl @Inject constructor(
                 val sessionIdResponse = accountService.generateSession(requestBody)
                 val account = accountService.getDetails(sessionIdResponse.sessionId)
                 accountDao.upsertAccount(account.toEntity(sessionId = sessionIdResponse.sessionId))
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 Log.e(TAG, "updateSessionId", e)
             }
         }

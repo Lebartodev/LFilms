@@ -6,12 +6,13 @@ import com.lebartodev.core.db.dao.CreditsDao
 import com.lebartodev.core.db.dao.GenresDao
 import com.lebartodev.core.db.dao.MoviesDao
 import com.lebartodev.core.network.MoviesService
-import com.lebartodev.lib_utils.utils.AppCoroutineScope
 import com.lebartodev.core.utils.ImageUrlProvider
 import com.lebartodev.lib_authentication.di.AuthenticationModule
-import com.lebartodev.lib_authentication.network.AccountService
 import com.lebartodev.lib_authentication.manager.AccountManager
+import com.lebartodev.lib_authentication.network.AccountService
+import com.lebartodev.lib_trending.TrendingRepository
 import com.lebartodev.lib_utils.di.scope.AppScope
+import com.lebartodev.lib_utils.utils.AppCoroutineScope
 import dagger.BindsInstance
 import dagger.Component
 
@@ -28,6 +29,7 @@ interface CoreComponent {
     fun accountRepository(): AccountManager
     fun accountService(): AccountService
     fun coroutineScope(): AppCoroutineScope
+    fun trendingRepository(): TrendingRepository
 
     @Component.Builder
     interface Builder {
